@@ -55,3 +55,17 @@ CREATE TABLE OWNER_MATERIAL(
     user_id int NOT NULL REFERENCES OWNER_MATERIAL(id),
     PRIMARY KEY (material_id, user_id)
 );
+
+CREATE TABLE SUBMITTED_PROJECT(
+    bootcamp_id int NOT NULL REFERENCES BOOTCAMP(id),
+    project_id int NOT NULL REFERENCES PROJECT(id),
+    PRIMARY KEY (bootcamp_id, project_id)
+);
+
+CREATE TABLE EVALUTED_PROJECT(
+    bootcamp_id int NOT NULL REFERENCES BOOTCAMP(id),
+    project_id int NOT NULL REFERENCES PROJECT(id),
+    quality_grade int NOT NULL,
+    creativity_grade int NOT NULL,
+    PRIMARY KEY (bootcamp_id, project_id)
+)
