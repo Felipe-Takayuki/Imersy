@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS;
+DROP DATABASE IF EXISTS imersy;
 
 CREATE DATABASE imersy;
 
@@ -7,10 +7,14 @@ USE imersy;
 CREATE TABLE USER(
     id int NOT NULL auto_increment PRIMARY KEY,
     user_type varchar(10) NOT NULL,
-    name varchar(256) NOT NULL,
+    name varchar(256) UNIQUE NOT NULL,
     email varchar(256) UNIQUE NOT NULL,
-    cpf char(64) UNIQUE NOT NULL, 
-    password char(64) NOT NULL
+    cpf char(64) UNIQUE NOT NULL,
+    scholl varchar(256) NOT NULL,
+    teach_type varchar(7) NOT NULL,
+    high_scholl int NOT NULL,
+    password char(64) NOT NULL,
+    phone_number bigint NOT NULL
 ); 
 
 CREATE TABLE PROJECT(
@@ -35,15 +39,17 @@ CREATE TABLE BOOTCAMP(
     end_date TIMESTAMP NOT NULL
 );
 
-CREATE SUBSCRIBER_BOOTCAMP(
+INSERT INTO `bootcamp` (`id`, `title`, `address`, `start_date`, `end_date`) VALUES (1, 'Jovem Programador 2024', 'rua higino muzy', '2024-08-30 19:03:03', '2024-09-06 19:03:06');
+
+
+CREATE TABLE SUBSCRIBER_BOOTCAMP(
     bootcamp_id int NOT NULL REFERENCES BOOTCAMP(id),
     user_id int NOT NULL REFERENCES USER(id),
-    subscribe_type varchar(256) NOT NULL,
-    high_scholl int NOT NULL,
+
     PRIMARY KEY (bootcamp_id, user_id)
 );
 
-CREATE CLASS_MATERIAL(
+CREATE TABLE CLASS_MATERIAL(
     id int NOT NULL auto_increment PRIMARY KEY,
     title varchar(150) NOT NULL,
     subject varchar(256) NOT NULL,
