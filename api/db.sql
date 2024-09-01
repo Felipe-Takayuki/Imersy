@@ -17,12 +17,18 @@ CREATE TABLE USER(
     phone_number bigint NOT NULL
 ); 
 
+INSERT INTO `user` ( `user_type`, `name`, `email`, `cpf`, `scholl`, `teach_type`, `high_scholl`, `password`, `phone_number`) VALUES 
+    ('mentor', 'joze', 'joze@email.com', '0000000000000', 'ETEC ANTONIO DEVISATE', 'tecnico', 4, '9f53d166c84cb97584c12c6e3875ac3e9bc6eedd97448508830331836b2b260e', 14999999999),
+    ('mentor', 'isaac', 'isaac@email.com', '0000000000001', 'ETEC ANTONIO DEVISATE', 'tecnico', 4, '9f53d166c84cb97584c12c6e3875ac3e9bc6eedd97448508830331836b2b260e', 14999999998),
+    ('mentor', 'marco', 'marco@email.com', '0000000000002', 'ETEC ANTONIO DEVISATE', 'tecnico', 4, '9f53d166c84cb97584c12c6e3875ac3e9bc6eedd97448508830331836b2b260e', 14999999997);
+
 CREATE TABLE PROJECT(
     id int NOT NULL auto_increment PRIMARY KEY,
     name varchar(150) NOT NULL,
     description nvarchar(500) NOT NULL,
     video_url nvarchar(2100) NOT NULL,
-    github_url nvarchar(2100) NOT NULL
+    github_url nvarchar(2100) NOT NULL,
+    status char(7) NOT NULL
 );
 
 CREATE TABLE PROJECT_OWNER(
@@ -68,10 +74,10 @@ CREATE TABLE SUBMITTED_PROJECT(
     PRIMARY KEY (bootcamp_id, project_id)
 );
 
-CREATE TABLE EVALUTED_PROJECT(
-    bootcamp_id int NOT NULL REFERENCES BOOTCAMP(id),
+CREATE TABLE EVALUATED_PROJECT(
+    evaluator_id int NOT NULL REFERENCES USER(id),
     project_id int NOT NULL REFERENCES PROJECT(id),
     quality_grade int NOT NULL,
     creativity_grade int NOT NULL,
-    PRIMARY KEY (bootcamp_id, project_id)
+    PRIMARY KEY (evaluator_id, project_id)
 )
