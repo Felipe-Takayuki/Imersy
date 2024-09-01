@@ -17,10 +17,11 @@ func (bdb *BootcampDatabase) RegisterInBootcamp(bootcampID int, subscribeType st
 
 	udb := NewUserDB(bdb.db) 
 	user := model.NewUser(userType, userName, userEmail, userPassword, userCPF, userScholl, subscribeType,highScholl, phoneNumber)
-	_ , err := udb.RegisterUser(user.UserType, user.Name, user.Email, user.Password, user.Cpf, user.Scholl, user.TeachType, user.HighScholl, user.PhoneNumber)
+	userId , err := udb.RegisterUser(user.UserType, user.Name, user.Email, user.Password, user.Cpf, user.Scholl, user.TeachType, user.HighScholl, user.PhoneNumber)
 	if err != nil {
 		return nil, err 
 	}
+	user.ID = userId.ID
 	_, err = bdb.db.Exec("INSERT INTO SUBSCRIBER_BOOTCAMP(bootcamp_id, user_id) VALUES (?, ?)", bootcampID, user.ID)
 	if err != nil {
 		return nil, err 
