@@ -40,5 +40,18 @@ func Router(db *sql.DB) http.Handler {
 	c.Post("/login", func(w http.ResponseWriter, r *http.Request) {
 		userWebServer.LoginUser(w, r, tokenAuth)
 	})
+	c.Get("/rank/{categorie}", userWebServer.GetTopRankProjectsByCategorie)
+	c.Get("/material-class", userWebServer.GetMaterialsClass)
+	c.Get("/material-class/{material_id}", userWebServer.GetMaterialClassByID)
+	c.Group(func(r chi.Router) {
+		r.Use(jwtauth.Verifier(tokenAuth))
+		r.Use(jwtauth.Authenticator)
+		
+		r.Post("/project",userWebServer.SendProject)
+		r.Get("/project",userWebServer.GetProjectByUserID)
+		r.Get("/project/{categorie}", userWebServer.GetProjectsByCategorie)
+		r.Post("/evaluate/project", userWebServer.SendEvaluationProject)
+		r.Post("/material-class", userWebServer.SendMaterialClass)
+	})
 	return c
 }
