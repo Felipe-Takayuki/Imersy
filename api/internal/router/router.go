@@ -41,6 +41,7 @@ func Router(db *sql.DB) http.Handler {
 		userWebServer.LoginUser(w, r, tokenAuth)
 	})
 	c.Get("/rank/{categorie}", userWebServer.GetTopRankProjectsByCategorie)
+	c.Get("/bootcamp", bootcampWebServer.GetBootcampActual)
 	c.Get("/material-class", userWebServer.GetMaterialsClass)
 	c.Get("/material-class/{material_id}", userWebServer.GetMaterialClassByID)
 	c.Group(func(r chi.Router) {

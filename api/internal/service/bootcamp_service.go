@@ -22,3 +22,11 @@ func (bs *BootcampService) RegisterInBootcamp(bootcampID int, subscribeType stri
 	}
 	return user, nil 
 }
+
+func (bs *BootcampService) GetBootcampActual() (*model.Bootcamp, error) {
+	bootcamp, err := bs.bdb.GetBootcampActual()
+	if err != nil {
+		return nil, err 
+	}
+	return bootcamp, nil 
+}

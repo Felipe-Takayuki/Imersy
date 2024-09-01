@@ -29,4 +29,12 @@ func (bdb *BootcampDatabase) RegisterInBootcamp(bootcampID int, subscribeType st
 	return user, nil 
 }
 
+func (bdb *BootcampDatabase) GetBootcampActual() (*model.Bootcamp, error) {
+	var bootcamp model.Bootcamp
+	err := bdb.db.QueryRow("SELECT id, title, address, start_date, end_date FROM BOOTCAMP WHERE YEAR(start_date) = YEAR(CURRENT_DATE)").Scan(&bootcamp.ID, &bootcamp.Title, &bootcamp.Address, &bootcamp.StartDate, &bootcamp.EndDate)
+	if err != nil {
+		return nil, err 
+	}
+	return &bootcamp, nil 
+} 
 
