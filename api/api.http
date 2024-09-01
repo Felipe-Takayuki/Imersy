@@ -11,3 +11,59 @@ Content-Type: application/json
     "scholl": "Etec Antonio Devisate",
     "phone_number": 14999999999
 }
+
+###
+POST http://localhost:3000/login 
+
+{
+    "email": "felipe@email.com",
+    "password": "felipe123"
+}
+
+### 
+POST http://localhost:3000/material-class
+Authorization: Bearer TOKEN
+
+{
+    "title": "Aula 1",
+    "subject": "principios básicos de html e css",
+    "content": "### HTML (Linguagem de Marcação de HiperTexto)\n- é o bloco de construção mais básico da web. Define o significado e a estrutura do conteúdo da web. Outras tecnologias além do HTML geralmente são usadas para descrever a aparência/apresentação (CSS) ou a funcionalidade/comportamento (JavaScript) de uma página da web.\n### Cascading Style Sheets (CSS)\n- é usado para formatar o layout de uma página da web. Com CSS, você pode controlar a cor, a fonte, o tamanho do texto, o espaçamento entre os elementos, como os elementos são posicionados e dispostos, quais imagens ou cores de fundo serão usadas, diferentes exibições para diferentes dispositivos e tamanhos de tela e muito mais!"
+}
+
+### 
+POST http://localhost:3000/project 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZUBlbWFpbC5jb20iLCJleHAiOjE3MjUxNDg3NzQsImlkIjo0LCJuYW1lIjoiRmVsaXBlIiwidXNlcl90eXBlIjoiZXN0dWRhbnRlIn0.GOwst77mBjDNhf5eeJ2UFFYpL6DggACh7So-QP1jCuQ
+
+{
+    "title": "Imersy",
+    "description": "uma plataforma unimar, com o objetivo de facilitar a participação dos estudantes em bootcamps",
+    "video_url": "https://youtu.be/nJkVHusJp6E?si=KPmVLomxSvrE3FIt",
+    "project_url": "https://github.com/Felipe-Takayuki/Imersy"
+}
+
+###
+POST http://localhost:3000/evaluate/project
+Authorization: Bearer TOKEN
+
+{
+    "project_id": 1,
+    "quality_grade": 10, 
+    "creativity_grade": 10
+}
+
+###
+GET http://localhost:3000/project/tecnico
+Authorization: Bearer TOKEN
+
+###
+GET http://localhost:3000/project
+Authorization: Bearer TOKEN
+
+### 
+GET http://localhost:3000/material-class
+
+### 
+GET http://localhost:3000/material-class/1
+
+### 
+GET http://localhost:3000/rank/tecnico
