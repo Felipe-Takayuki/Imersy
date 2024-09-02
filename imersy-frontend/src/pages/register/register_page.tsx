@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
-import { api } from "../../api/api";
-import { format, formatDate } from "date-fns";
+import { format } from "date-fns";
 
 interface BootCamp {
     id:number;
