@@ -67,3 +67,6 @@ GET http://localhost:3000/material-class/1
 
 ### 
 GET http://localhost:3000/rank/tecnico
+
+###
+GET http://localhost:3000/bootcamp
