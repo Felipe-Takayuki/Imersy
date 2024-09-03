@@ -12,7 +12,6 @@ interface MaterialClass {
 }
 export function MaterialSection() {
     const [materials, setMaterials] = useState<MaterialClass[]>([])
-    const navigate = useNavigate()
 
     useEffect(() => {
         api.get("/material-class").then(response => {setMaterials(response.data)})
