@@ -1,20 +1,10 @@
-import { useNavigate } from "react-router-dom"
 import "../../../public/icons/stars.svg"
 import { NavBar } from "./navbar"
-import { api } from "../../api/api"
+import { ToRegister } from "../../api/bootcamp"
+import { useNavigate } from "react-router-dom"
 
 export function HomePage() {
     const navigate = useNavigate()
-    async function ToRegister() {
-        try {
-            const response = await api.get("/bootcamp")
-            localStorage.setItem("bootcamp", JSON.stringify(response.data));
-            navigate(`${response.data.id}/register`)
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
     return (
         <>
             <NavBar />
@@ -25,7 +15,7 @@ export function HomePage() {
                     E participe do nosso
                     <b className="font-bold"> Bootcamp <br /> Jovem Programador!</b>
                 </p> 
-                <button onClick={ToRegister} className="w-96 mt-10 h-36 text-5xl font-medium text-white text-center rounded-2xl bg-blue-2 mr-4 mb-40">Inscreva-se</button>
+                <button onClick={() => ToRegister(navigate)} className="w-96 mt-10 h-36 text-5xl font-medium text-white text-center rounded-2xl bg-blue-2 mr-4 mb-40">Inscreva-se</button>
               </section>
               <section className=" flex bg-white  ">
                 <div className="w-1/2 flex flex-col items-start p-16 justify-start">

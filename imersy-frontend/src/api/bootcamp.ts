@@ -1,3 +1,4 @@
+import { NavigateFunction } from "react-router-dom";
 import { api } from "./api";
 
 export async function GetBootcamp() {
@@ -10,3 +11,15 @@ export async function GetBootcamp() {
         console.error(error);
     }
 }
+export async function ToRegister(navigate:NavigateFunction) {
+    try {
+        const response = await api.get("/bootcamp")
+        localStorage.setItem("bootcamp", JSON.stringify(response.data));
+        navigate(`${response.data.id}/register`)
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
+
