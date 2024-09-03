@@ -47,7 +47,7 @@ func Router(db *sql.DB) http.Handler {
 	c.Group(func(r chi.Router) {
 		r.Use(jwtauth.Verifier(tokenAuth))
 		r.Use(jwtauth.Authenticator)
-		
+		r.Get("/user", userWebServer.GetInfoUser)
 		r.Post("/project",userWebServer.SendProject)
 		r.Get("/project",userWebServer.GetProjectByUserID)
 		r.Get("/project/{categorie}", userWebServer.GetProjectsByCategorie)

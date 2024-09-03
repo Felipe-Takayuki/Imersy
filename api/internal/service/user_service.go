@@ -23,6 +23,14 @@ func (us *UserService) LoginUser(email, password string) (*model.User, error) {
 	return user, nil
 }
 
+func (us *UserService) GetInfoUser(userID int64) (*model.User, error) {
+	user, err := us.userDB.GetInfoUser(userID)
+	if err != nil {
+		return nil, err 
+	}
+	return user, nil 
+}
+
 func (us *UserService) SendProject(title,description, videoUrl, projectUrl string, ownerID int) (*model.Project, error) {
 	project, err := us.userDB.SendProject(title, description,videoUrl,projectUrl,ownerID)
 	if err != nil {

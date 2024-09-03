@@ -30,6 +30,15 @@ func (udb *UserDB) RegisterUser(userType, name, email, password, cpf, scholl, te
 	
 	return user, nil
 }
+
+func (udb *UserDB) GetInfoUser(userID int64) (*model.User, error) {
+	var user model.User
+	err := udb.db.QueryRow("SELECT id, name, email, user_type FROM USER WHERE id = ?", userID).Scan(&user.ID, &user.Name, &user.Email, &user.UserType)
+	if err != nil {
+		return nil, err 
+	}
+	return &user, nil 
+} 
 func (udb *UserDB) LoginUser(email, password string) (*model.User, error) {
 	var user model.User
 	err := udb.db.QueryRow("SELECT id, name, email, user_type FROM USER WHERE email = ? and password = ?", email, utils.EncriptKey(password)).Scan(

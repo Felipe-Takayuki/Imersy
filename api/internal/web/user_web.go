@@ -42,6 +42,22 @@ func (uws *UserWebServer) LoginUser(w http.ResponseWriter, r *http.Request, toke
 	})
 }
 
+func (uws *UserWebServer) GetInfoUser(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	_, claims, _ := jwtauth.FromContext(r.Context())
+	userID, ok := claims["id"].(float64)
+	if !ok {
+		http.Error(w, "id is not int!", http.StatusInternalServerError)
+		return
+	}
+	user, err := uws.userService.GetInfoUser(int64(userID))
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(err.Error())
+		return
+	}
+	json.NewEncoder(w).Encode(user)
+}
 func (uws *UserWebServer) SendProject(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var project *model.Project
