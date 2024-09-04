@@ -1,16 +1,23 @@
-import { createContext, useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavBarUser } from "./navbar_user";
 import { MaterialSection } from "./categories/material";
+import { decodeToken } from "../../utils/decoded";
+import { getToken } from "../../auth/auth";
+import { ProjectSection } from "./categories/project";
 
-const AuthContext = createContext(null);
-export const useAuth = () => useContext(AuthContext);
+
 export function UserPage() {
-
+  const [userType, setUserType] = useState("") 
   const [activeButton, setActiveButton] = useState("material");
- 
+  
+  useEffect(() => {
+    var token = getToken()
+    setUserType(decodeToken(token!).user_type)    
+  },[] )
   function detectButtonClick(button: string) {
     setActiveButton(button);
   };
+
   return (
     <>
     <NavBarUser />
@@ -23,8 +30,8 @@ export function UserPage() {
           material de aula
         </button>
         <button 
-          className={`w-auto h-12 mx-7 px-3 py-1 rounded-full text-2xl text-center font-semibold ${activeButton === 'projeto' ? 'bg-white text-blue-2 border-white border-4' : 'bg-blue-2 text-white border-white border-4'}`}
-          onClick={() => detectButtonClick("projeto")}  
+          className={`w-auto h-12 mx-7 px-3 py-1 rounded-full text-2xl text-center font-semibold ${activeButton === 'project' ? 'bg-white text-blue-2 border-white border-4' : 'bg-blue-2 text-white border-white border-4'}`}
+          onClick={() => detectButtonClick("project")}  
         >
           Enviar Projeto
         </button>
@@ -36,7 +43,7 @@ export function UserPage() {
         </button>
       </div>
       <div>
-        {activeButton == "material" ? <MaterialSection /> : null}
+        {activeButton == "material" ? <MaterialSection userType={userType} /> : activeButton == "project" ? <ProjectSection /> :null}
       </div>
       </main>
 

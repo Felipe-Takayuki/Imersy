@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { api } from "../../../api/api";
-import { useNavigate } from "react-router-dom";
+import  api  from "../../../api/api";
 import { MaterialClassCard } from "../../../components/materialclass_card";
 
 interface MaterialClass {
@@ -10,18 +9,35 @@ interface MaterialClass {
     subject: string
     content: string 
 }
-export function MaterialSection() {
-    const [materials, setMaterials] = useState<MaterialClass[]>([])
 
+
+export function MaterialSection({userType}:{userType:string}) {
+    const [materials, setMaterials] = useState<MaterialClass[]>([])
+    
     useEffect(() => {
-        api.get("/material-class").then(response => {setMaterials(response.data)})
-    }, materials)
+        const Materials = async () => {
+            try {
+              const response = await api.get('material-class');
+              setMaterials(response.data);
+            } catch (error) {
+              console.log('Erro ao buscar materiais:', error);
+            }
+        };
+        Materials()
+    }, [])
     return (
         <>
          <div>
-            {materials.map(material => {
-                return  <MaterialClassCard id={material.id} owner_name={material.owner_name} subject={material.subject} title={material.title} />
-            })}
+            {userType == "mentor" ? <>
+             <button className="mt-12 px-20 py-7 text-3xl rounded-2xl text-white bg-blue-2">Escrever aula</button>
+            </>: null}
+            {
+             materials !== null ? 
+             materials.map(material => {
+                return  <MaterialClassCard key={material.id} id={material.id} owner_name={material.owner_name} subject={material.subject} title={material.title} />
+            }) : null
+        
+        }
          </div>
         </>
     )
