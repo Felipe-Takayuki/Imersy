@@ -121,39 +121,24 @@ func (uws *UserWebServer) SendEvaluationProject(w http.ResponseWriter, r *http.R
 	}
 }
 func (uws *UserWebServer) GetProjectsByCategorie(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	_, claims, _ := jwtauth.FromContext(r.Context())
+		w.Header().Set("Content-Type", "application/json")
 
-	userType, ok := claims["user_type"].(string)
-	if !ok {
-		http.Error(w, "user_type is not string!", http.StatusInternalServerError)
-		return
-	}
-
-
-	if userType == "mentor" {
+		
 		categorie := chi.URLParam(r, "categorie")
 		if categorie == "" {
 			http.Error(w, "categorie is empty", http.StatusInternalServerError)
 			return
 		}
-		evaluatorID, ok := claims["id"].(float64)
-		if !ok {
-			http.Error(w, "id is not int!", http.StatusInternalServerError)
-			return
-		}
-		projects, err := uws.userService.GetProjectsByCategorie(int64(evaluatorID) ,categorie)
+
+		projects, err := uws.userService.GetProjectsByCategorie(categorie)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(err.Error())
 			return
 		}
 		json.NewEncoder(w).Encode(projects)
-	} else {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(map[string]interface{}{"error":"not have permission"})
-		return
-	}
+	
+	
 }
 func (uws *UserWebServer) GetTopRankProjectsByCategorie(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")

@@ -44,13 +44,14 @@ func Router(db *sql.DB) http.Handler {
 	c.Get("/bootcamp", bootcampWebServer.GetBootcampActual)
 	c.Get("/material-class", userWebServer.GetMaterialsClass)
 	c.Get("/material-class/{material_id}", userWebServer.GetMaterialClassByID)
+	c.Get("/project/{categorie}", userWebServer.GetProjectsByCategorie)
+
 	c.Group(func(r chi.Router) {
 		r.Use(jwtauth.Verifier(tokenAuth))
 		r.Use(jwtauth.Authenticator)
 		r.Get("/user", userWebServer.GetInfoUser)
 		r.Post("/project",userWebServer.SendProject)
 		r.Get("/project",userWebServer.GetProjectByUserID)
-		r.Get("/project/{categorie}", userWebServer.GetProjectsByCategorie)
 		r.Post("/evaluate/project", userWebServer.SendEvaluationProject)
 		r.Post("/material-class", userWebServer.SendMaterialClass)
 	})
