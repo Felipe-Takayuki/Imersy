@@ -1,7 +1,8 @@
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { format } from "date-fns";
-import { api } from "../../api/api";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
+import { RegisterEvent } from "../../api/auth";
+import { GetBootcamp } from "../../api/bootcamp";
 
 interface BootCamp {
   id: number;
@@ -12,7 +13,6 @@ interface BootCamp {
 }
 
 export function RegisterPage() {
-  const { bootcamp_id } = useParams<{ bootcamp_id: string }>();
   const navigate = useNavigate()
   const [bootCamp, setBootcamp] = useState<BootCamp | undefined>();
   const [selectedSubscribeType, setSelectedSubscribeType] = useState("");
@@ -32,34 +32,12 @@ export function RegisterPage() {
   function handleHighScholl(event: React.ChangeEvent<HTMLInputElement>) {
     setSelectedHighScholl(event.target.value);
   }
-  async function RegisterEvent(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  
 
-    try {
-      const response = await api.post(`${bootcamp_id}/register`, {
-        teach_type: selectedSubscribeType,
-        high_scholl: parseInt(selectedHighScholl),
-        name: userName,
-        email: userEmail,
-        password: userPassword,
-        cpf: userCPF,
-        scholl: userScholl,
-        phone_number: parseInt(userPhone),
-      });
-      localStorage.setItem("token", response.data)
-      setUserPassword("");
-      localStorage.removeItem("bootcamp")
-      setTimeout(() => {
-        navigate("/home");
-      }, 3000);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  function GetBootcamp() {
-    var data = localStorage.getItem("bootcamp");
+  async function GetInfoBootcamp() {
+    var data = await GetBootcamp()
     const parse = JSON.parse(data!);
+    console.log(parse)
     setBootcamp(parse);
   }
   var date = bootCamp
@@ -69,7 +47,7 @@ export function RegisterPage() {
     : null;
 
   useEffect(() => {
-    GetBootcamp();
+    GetInfoBootcamp();
   }, []);
 
   return (
@@ -82,7 +60,7 @@ export function RegisterPage() {
             {bootCamp?.address}
           </p>
 
-          <form  className="flex flex-col items-center" onSubmit={RegisterEvent}>
+          <form  className="flex flex-col items-center" onSubmit={(e) => RegisterEvent({event: e, id: 1, highScholl: selectedHighScholl, navigate: navigate, phoneNumber: userPhone, selectedSubscribeType: selectedSubscribeType, setUserPassword: setUserPassword, userCPF: userCPF, userEmail: userEmail, userName: userName, userPassword: userPassword, userScholl: userScholl })}>
             <fieldset className="w-full  ">
               <legend className="text-3xl font-medium text-white">
                 Tipo de inscrição
