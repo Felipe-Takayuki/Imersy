@@ -241,7 +241,7 @@ func (udb *UserDB) SendMaterialClass(title, subject, content string, userID int6
 
 func (udb *UserDB) GetMaterialsClass() ([]*model.MaterialClass, error) {
 	query := `
-	SELECT m.id, m.title, u.name, m.subject, m.content FROM CLASS_MATERIAL m 
+	SELECT m.id, m.title, u.name, m.subject FROM CLASS_MATERIAL m 
 	JOIN OWNER_MATERIAL om ON om.material_id = m.id
 	JOIN USER u ON u.id = om.user_id
 	`
@@ -253,7 +253,7 @@ func (udb *UserDB) GetMaterialsClass() ([]*model.MaterialClass, error) {
 	var materials []*model.MaterialClass
 	for rows.Next() {
 		var material model.MaterialClass
-		if err := rows.Scan(&material.ID, &material.Title, &material.OwnerName, &material.Subject, &material.Content); err != nil {
+		if err := rows.Scan(&material.ID, &material.Title, &material.OwnerName, &material.Subject); err != nil {
 			return nil, err
 		}
 		materials = append(materials, &material)

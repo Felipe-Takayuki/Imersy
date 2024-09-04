@@ -229,6 +229,8 @@ func (uws *UserWebServer) GetMaterialsClass(w http.ResponseWriter, r *http.Reque
 	json.NewEncoder(w).Encode(getMaterials)
 }
 
+
+
 func (uws *UserWebServer) GetMaterialClassByID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	materialID, err := strconv.Atoi(chi.URLParam(r, "material_id"))
