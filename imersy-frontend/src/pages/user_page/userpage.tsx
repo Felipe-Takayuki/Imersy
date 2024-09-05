@@ -44,7 +44,7 @@ export function UserPage() {
         </button>
       </div>
       <div>
-        {categorie == "material" ? <MaterialSection userType={userType}  setCategory={setCategorie}/> : categorie == "project" ? <ProjectSection userType={userType} /> : categorie == "write-material" ? <WriteSection /> :null }
+        {categorie == "material" ? <MaterialSection userType={userType}  setCategory={setCategorie}/> : categorie == "project" ? <ProjectSection userType={userType} setCategory={setCategorie}/> : categorie == "write-material" ? <WriteSection /> :null }
       </div>
       </main>
 

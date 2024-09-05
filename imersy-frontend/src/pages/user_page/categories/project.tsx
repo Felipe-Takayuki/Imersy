@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import api from "../../../api/api";
 import { ProjectCard } from "../../../components/project_card";
-import { getToken } from "../../../auth/auth";
+import { GetProjectsCategorie, GetProjectUser } from "../../../api/project";
+import { WriteProjectSection } from "./write_project";
 
-interface ProjectType{
+export interface ProjectType{
     id: number
     title: string 
     owner_name: string,
@@ -11,29 +11,13 @@ interface ProjectType{
     video_url: string
     project_url: string
 }
-export function ProjectSection({userType}:{userType: string}) {
+export function ProjectSection({userType, setCategory}:{userType: string, setCategory:(category:string)=>void}) {
     const [projects, setProjects] = useState<ProjectType[]>([])
     const [project, setProject] = useState<ProjectType>()
     const [typeSubscribe, setTypeSubscribe] = useState("medio");
 
-    useEffect(() => {
-        const Projects = async () => {
-            try {
-              const response = await api.get(`/project/${typeSubscribe}`);
-              setProjects(response.data);
-            } catch (error) {
-              console.log('Erro ao buscar materiais:', error);
-            }
-        };
-        const UserProject = async () => {
-          try {
-            const response = await api.get('/project', {headers: {Authorization: `Bearer ${getToken()}`}})
-            setProject(response.data)
-          } catch (error) {
-            console.log(error)
-          }
-        }
-        userType == "mentor" ? Projects() : UserProject()
+    useEffect(() => { 
+        userType == "mentor" ? GetProjectsCategorie(setProjects, typeSubscribe) : GetProjectUser(setProject)
     }, [typeSubscribe])
     return (
         <>
@@ -45,8 +29,8 @@ export function ProjectSection({userType}:{userType: string}) {
          ) : null }
          {
            userType == "mentor" ?
-            projects !== null ? projects.map((project) => { return <ProjectCard id={project.id} owner_name={project.owner_name} userType={userType} description={project.description} project_url={project.project_url} title={project.title} video_url={project.video_url} key={project.id} /> } ): null
-          : <ProjectCard id={project?.id!} owner_name={project?.owner_name!} description={project?.description!} project_url={project?.project_url!} title={project?.title!} userType={userType} video_url={project?.video_url!} key={project?.id}/>
+            projects !== null ? projects.map((project) => { return <ProjectCard  id={project.id} owner_name={project.owner_name} userType={userType} description={project.description} project_url={project.project_url} title={project.title} video_url={project.video_url} key={project.id} /> } ): null
+          : !!project ? <ProjectCard setCategorie={setCategory} id={project?.id!} owner_name={project?.owner_name!} description={project?.description!} project_url={project?.project_url!} title={project?.title!} userType={userType} video_url={project?.video_url!} key={project?.id}/> : <WriteProjectSection  /> 
           } 
         </>
     )

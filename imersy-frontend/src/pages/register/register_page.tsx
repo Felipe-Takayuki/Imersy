@@ -4,7 +4,7 @@ import { useNavigate} from "react-router-dom";
 import { RegisterEvent } from "../../api/auth";
 import { GetBootcamp } from "../../api/bootcamp";
 
-interface BootCamp {
+export interface BootCamp {
   id: number;
   title: string;
   address: string;
@@ -34,12 +34,7 @@ export function RegisterPage() {
   }
   
 
-  async function GetInfoBootcamp() {
-    var data = await GetBootcamp()
-    const parse = JSON.parse(data!);
-    console.log(parse)
-    setBootcamp(parse);
-  }
+  
   var date = bootCamp
     ? format(bootCamp.start_date, "dd'/'LL")
         .concat(" - ")
@@ -47,13 +42,13 @@ export function RegisterPage() {
     : null;
 
   useEffect(() => {
-    GetInfoBootcamp();
+    GetBootcamp(setBootcamp);
   }, []);
 
   return (
     <>
       <div className="w-vh h-vh flex justify-center  ">
-        <div className=" h-vh w-1/2 bg-blue-2 mt-9 p-9">
+        <div className=" h-vh w-1/2 bg-blue-2 mt-9 p-9 rounded-t-xl">
           <p className="font-medium text-white text-4xl">{bootCamp?.title}</p>
           <p className="font-medium text-gray text-xl">{date}</p>
           <p className="font-medium text-gray text-xl mb-12">

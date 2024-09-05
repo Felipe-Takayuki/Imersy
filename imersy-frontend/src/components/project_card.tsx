@@ -9,9 +9,10 @@ interface ProjectProps{
     video_url:string
     project_url:string
     userType: string
+    setCategorie?: (categorie:string) => void
 }
 
-export function ProjectCard({id, title, owner_name, userType, description, project_url, video_url}:ProjectProps) {
+export function ProjectCard({id, title, owner_name, userType, description, project_url, video_url, setCategorie} :ProjectProps) {
     const [showModal, setShowModal] = useState(false)
     return (
         <>
@@ -22,7 +23,7 @@ export function ProjectCard({id, title, owner_name, userType, description, proje
                 <a href={video_url} className="flex items-center underline text-white text-xl"><img src="../../public/icons/Youtube.svg"  />Vídeo do youtube</a> 
                 <a href={project_url} className="flex items-center underline text-white text-xl"><img src="../../public/icons/github.svg"  /> Link do projeto</a>
                 {userType == "mentor" ? (<button className="mt-5 bg-blue-4 p-3 flex items-center text-white text-2xl rounded-xl " onClick={() => setShowModal(!showModal)}>Avaliar <img className="ml-4" src="../../public/icons/arrow.svg"  /></button>) : null }
-                {showModal ? <EvaluableModal id={id} setShowModal={setShowModal}/> : null }
+                {showModal ? <EvaluableModal id={id} setShowModal={setShowModal} setCategorie={setCategorie!} /> : null }
             </div>
         
         </>

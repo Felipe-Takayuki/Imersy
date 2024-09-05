@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import  api  from "../../../api/api";
 import { MaterialClassCard } from "../../../components/materialclass_card";
+import { GetMaterial } from "../../../api/m_class";
 
 export interface MaterialClass {
     id:number
@@ -15,15 +16,7 @@ export function MaterialSection({userType, setCategory}:{userType:string, setCat
     const [materials, setMaterials] = useState<MaterialClass[]>([])
     
     useEffect(() => {
-        const Materials = async () => {
-            try {
-              const response = await api.get('material-class');
-              setMaterials(response.data);
-            } catch (error) {
-              console.log('Erro ao buscar materiais:', error);
-            }
-        };
-        Materials()
+        GetMaterial(setMaterials)
     }, [])
     return (
         <>

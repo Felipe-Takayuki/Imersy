@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { SendGrades } from "../api/project"
 
-export function EvaluableModal({id, setShowModal}:{id:number, setShowModal: React.Dispatch<React.SetStateAction<boolean>>}) {
+export function EvaluableModal({id, setShowModal, setCategorie}:{id:number, setShowModal: (smodal:boolean) => void, setCategorie: (categorie:string)=>void}) {
     const [qualityGrade, setQualityGrade] = useState("")
     const [creativityGrade, setCreativityGrade] = useState("")
 
@@ -10,7 +10,7 @@ export function EvaluableModal({id, setShowModal}:{id:number, setShowModal: Reac
           <div className="w-1/4 h-auto border-4 border-white rounded-2xl bg-blue-2 flex flex-col px-10 py-5 ">
             <button className="w-full text-end text-2xl text-white" onClick={() => setShowModal(false)}>x</button>
             
-            <form onSubmit={ (event) => SendGrades(event,id,qualityGrade,creativityGrade)} className="flex flex-col items-center" method="post">
+            <form onSubmit={ (event) => SendGrades(event,id,qualityGrade,creativityGrade,setCategorie)} className="flex flex-col items-center" method="post">
             <p className="font-medium text-3xl text-white">Avaliar as notas</p>
 
             <input

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import api from "../../api/api"
 import { MaterialClass } from "../user_page/categories/material"
 import ReactMarkdown from "react-markdown"
 import { NavBarUser } from "../user_page/navbar_user"
