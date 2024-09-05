@@ -1,3 +1,4 @@
+import { FormEvent } from "react";
 import { getToken } from "../auth/auth";
 import api from "./api";
 
@@ -11,16 +12,21 @@ export async function GetProjects() {
     }
 }
 
-export async function SendGradesProject({projectID,qualityGrade, creativityGrade}:{projectID:number, qualityGrade:number, creativityGrade:number }) {
+
+
+
+export async function SendGrades(event:FormEvent<HTMLFormElement>,id:number, qualityGrade:string, creativityGrade:string  ) {
+    event.preventDefault()
+    const token = await getToken()
     try {
-        const response = await api.post("/evaluate/project", {
-            "project_id":projectID,
-            "quality_grade": qualityGrade,
-            "creativity_grade":creativityGrade
-        },{headers: {Authorization: `Bearer ${getToken}`}} )
-        return response.data
+      const response = await api.post("/evaluate/project", {
+        "project_id":id,
+        "quality_grade": parseInt(qualityGrade),
+        "creativity_grade": parseInt(creativityGrade)
+    },{headers: {Authorization: `Bearer ${token}`}} )
+    location.reload()
+    return response.data
     } catch (error) {
-        return error
+      console.log(error)
     }
-    
 }
