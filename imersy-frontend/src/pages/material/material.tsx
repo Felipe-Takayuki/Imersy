@@ -4,6 +4,7 @@ import api from "../../api/api"
 import { MaterialClass } from "../user_page/categories/material"
 import ReactMarkdown from "react-markdown"
 import { NavBarUser } from "../user_page/navbar_user"
+import { GetMaterialWContent } from "../../api/m_class"
 
 
 
@@ -12,15 +13,7 @@ export function MaterialClassPage() {
     const navigate = useNavigate()
     const [material, setMaterial] = useState<MaterialClass>()
     useEffect(() => {
-        async function GetMaterialWContent() {
-          try {
-            const response = await api.get(`/material-class/${material_id}`)
-            setMaterial(response.data)
-          } catch (error) {
-            console.log(error)
-          }
-        }
-        GetMaterialWContent()
+      GetMaterialWContent(material_id, setMaterial)
     }, [material_id])
     return (
     <>
