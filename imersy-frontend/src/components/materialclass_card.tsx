@@ -10,7 +10,7 @@ interface MaterialClassCardProps {
 export function MaterialClassCard({id, title, owner_name, subject}:MaterialClassCardProps) {
     const navigate = useNavigate()
     function ToMaterial(materialID: number) {
-        navigate(`/home/material/${materialID}`)
+        navigate(`/user-page/material/${materialID}`)
     }
     return (
         <>

@@ -189,7 +189,7 @@ export function RegisterPage() {
                 placeholder="ex: 44455544455"
                 onChange={event => setUserCPF(event.target.value)}
                 required
-                className=" [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none mb-4 rounded-2xl w-full h-14 border-4 border-white bg-blue-2 placeholder-gray text-2xl p-2 text-white focus:border-white focus:outline-none"
+                className=" mb-4 rounded-2xl w-full h-14 border-4 border-white bg-blue-2 placeholder-gray text-2xl p-2 text-white focus:border-white focus:outline-none"
               />
               <p className="text-2xl font-medium text-white ml-2">Telefone</p>
               <input
