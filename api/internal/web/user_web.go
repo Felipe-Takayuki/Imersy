@@ -122,15 +122,20 @@ func (uws *UserWebServer) SendEvaluationProject(w http.ResponseWriter, r *http.R
 }
 func (uws *UserWebServer) GetProjectsByCategorie(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-
+		_, claims, _ := jwtauth.FromContext(r.Context())
 		
+		userID, ok := claims["id"].(float64)
+		if !ok {
+			http.Error(w, "user id is not int", http.StatusInternalServerError)
+			return
+		}
 		categorie := chi.URLParam(r, "categorie")
 		if categorie == "" {
 			http.Error(w, "categorie is empty", http.StatusInternalServerError)
 			return
 		}
 
-		projects, err := uws.userService.GetProjectsByCategorie(categorie)
+		projects, err := uws.userService.GetProjectsByCategorie(int64(userID),categorie)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(err.Error())

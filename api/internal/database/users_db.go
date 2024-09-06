@@ -101,7 +101,7 @@ func (udb *UserDB) SendProject(title, description, videoUrl, projectUrl string, 
 // 	return projects, nil
 // }
 
-func (udb *UserDB) GetProjectsByCategorie(categorie string) ([]*model.Project, error) {
+func (udb *UserDB) GetProjectsByCategorie(userID int64, categorie string) ([]*model.Project, error) {
 	query := `
 	SELECT p.id, p.name, u.name, p.description, p.video_url, p.github_url FROM PROJECT p 
 	JOIN PROJECT_OWNER po ON po.project_id = p.id 
@@ -110,9 +110,10 @@ func (udb *UserDB) GetProjectsByCategorie(categorie string) ([]*model.Project, e
         SELECT 1
         FROM EVALUATED_PROJECT ep
         WHERE ep.project_id = p.id
+		AND ep.evaluator_id = ?
     ) 
 	AND u.teach_type = ?`
-	rows, err := udb.db.Query(query, categorie)
+	rows, err := udb.db.Query(query,userID,categorie)
 	if err != nil {
 		return nil, err
 	}

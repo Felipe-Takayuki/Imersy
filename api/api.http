@@ -16,7 +16,7 @@ Content-Type: application/json
 POST http://localhost:3000/login 
 
 {
-    "email": "joze@email.com",
+    "email": "isaac@email.com",
     "password": "arnaldo123"
 }
 
@@ -32,7 +32,7 @@ Authorization: Bearer TOKEN
 
 ### 
 POST http://localhost:3000/project 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwiZXhwIjoxNzI1NDc0MjQ0LCJpZCI6OSwibmFtZSI6InRlc3RlVXNlciIsInVzZXJfdHlwZSI6ImVzdHVkYW50ZSJ9.RamIOpuLc3zJNJnXTcZow70OBHmH5jDZWrwA5O35-Eg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImlzYWFjQGVtYWlsLmNvbSIsImV4cCI6MTcyNTU4MjcyMiwiaWQiOjIsIm5hbWUiOiJpc2FhYyIsInVzZXJfdHlwZSI6Im1lbnRvciJ9.Jtt2fBSdnWH7Gw8Ri4_XrfXnBEWb1cLQF7frS-hYg_s
 
 {
     "title": "ProjectTeste",
@@ -43,17 +43,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZ
 
 ###
 POST http://localhost:3000/evaluate/project
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvemVAZW1haWwuY29tIiwiZXhwIjoxNzI1NDc5OTE3LCJpZCI6MSwibmFtZSI6ImpvemUiLCJ1c2VyX3R5cGUiOiJtZW50b3IifQ.1KgVlbAfuuEW8234Sq0088CtnGSh553D-dns5GBkiWs
 
 {
-    "project_id": 2,
+    "project_id": 1,
     "quality_grade": 10, 
     "creativity_grade": 10
 }
 
 ###
 GET http://localhost:3000/project/tecnico
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImlzYWFjQGVtYWlsLmNvbSIsImV4cCI6MTcyNTU4MjcyMiwiaWQiOjIsIm5hbWUiOiJpc2FhYyIsInVzZXJfdHlwZSI6Im1lbnRvciJ9.Jtt2fBSdnWH7Gw8Ri4_XrfXnBEWb1cLQF7frS-hYg_s
 ###
 GET http://localhost:3000/project
 Authorization: Bearer TOKEN

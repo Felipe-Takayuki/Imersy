@@ -47,8 +47,8 @@ func (us *UserService) SendProject(title,description, videoUrl, projectUrl strin
 // 	return project, nil 
 // }
 
-func (us *UserService) GetProjectsByCategorie( categorie string)([]*model.Project, error) {
-	projects, err := us.userDB.GetProjectsByCategorie(categorie)
+func (us *UserService) GetProjectsByCategorie(userID int64, categorie string)([]*model.Project, error) {
+	projects, err := us.userDB.GetProjectsByCategorie(userID,categorie)
 	if err != nil {
 		return nil, err 
 	}
