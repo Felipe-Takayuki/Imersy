@@ -5,7 +5,8 @@ import { ProjectType } from "../pages/user_page/categories/project";
 
 export async function GetProjectsCategorie(setProjects:React.Dispatch<React.SetStateAction<ProjectType[]>> , typeSubscribe:string) {
     try {
-        const response = await api.get(`/project/${typeSubscribe}`);
+        const token = await getToken()
+        const response = await api.get(`/project/${typeSubscribe}`, {headers: {Authorization: `Bearer ${token}`}});
         setProjects(response.data);
       } catch (error) {
         console.log('Erro ao buscar materiais:', error);
@@ -32,13 +33,14 @@ export async function SendProject(event:FormEvent<HTMLFormElement>, title:string
         video_url: videoURL,
         project_url: projectURL
       }, {headers: {Authorization: `Bearer ${token}`}} )
+
       location.reload()
     } catch (error) {
       console.log(error)
     }
 }
 
-export async function SendGrades(event:FormEvent<HTMLFormElement>,id:number, qualityGrade:string, creativityGrade:string, setCategorie:(categorie:string) => void  ) {
+export async function SendGrades(event:FormEvent<HTMLFormElement>,id:number, qualityGrade:string, creativityGrade:string ) {
     event.preventDefault()
     const token = await getToken()
     try {
@@ -48,7 +50,6 @@ export async function SendGrades(event:FormEvent<HTMLFormElement>,id:number, qua
         "creativity_grade": parseInt(creativityGrade)
     },{headers: {Authorization: `Bearer ${token}`}} )
       location.reload()
-      setCategorie("project")
     } catch (error) {
       console.log(error)
     }
