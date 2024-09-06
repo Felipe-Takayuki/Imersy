@@ -28,6 +28,7 @@ export function LoginPage() {
                     id="password"
                     onChange={event => setPassword(event.target.value)}
                     placeholder="Senha"
+                    maxLength={8}
                     required
                     className="w-full rounded-2xl mt-3  h-14 border-4 border-white bg-blue-2 placeholder-gray text-2xl p-2 text-white focus:border-white focus:outline-none"
                />
