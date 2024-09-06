@@ -42,7 +42,7 @@ func (bws *BootcampWebServer) RegisterInBootcamp(w http.ResponseWriter, r *http.
 		json.NewEncoder(w).Encode(err.Error())
 		return
 	}
-	claims := map[string]interface{}{"id": user.ID, "name": user.Name, "email": user.Email, "user_type": user.UserType, "exp": jwtauth.ExpireIn(time.Minute * 20)}
+	claims := map[string]interface{}{"id": user.ID, "name": user.Name, "email": user.Email, "user_type": user.UserType, "exp": jwtauth.ExpireIn(time.Minute * 60)}
 	_, tokenString, _ := tokenAuth.Encode(claims)
 	json.NewEncoder(w).Encode(map[string]interface{}{
 		"token": tokenString,
