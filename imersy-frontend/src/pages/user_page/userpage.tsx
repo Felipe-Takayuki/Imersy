@@ -53,7 +53,7 @@ export function UserPage() {
             }`}
             onClick={() => detectCategoryClick("rank")}
           >
-            Rank
+            rank
           </button>
         </div>
         <div>
