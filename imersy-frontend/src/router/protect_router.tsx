@@ -10,11 +10,11 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const token = localStorage.getItem('token'); // Supondo que o JWT esteja armazenado no localStorage
 
   if (!token) {
-    return <Navigate to="/register" replace />;
+    return <Navigate to="/" replace />;
   }
   const timeNow = Math.floor(Date.now() / 1000);
   if (decodeToken(token).exp < timeNow) {
-    return <Navigate to="/login" replace />
+    return <Navigate to="/" replace />
   }
 
   return children;
