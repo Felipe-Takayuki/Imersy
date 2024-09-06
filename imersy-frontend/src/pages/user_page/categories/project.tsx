@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { ProjectCard } from "../../../components/project_card";
+import { ProjectEvaluableCard } from "../../../components/project_card";
 import { GetProjectsCategorie, GetProjectUser } from "../../../api/project";
 import { WriteProjectSection } from "./write_project";
 
@@ -11,7 +11,7 @@ export interface ProjectType{
     video_url: string
     project_url: string
 }
-export function ProjectSection({userType, setCategory}:{userType: string, setCategory:(category:string)=>void}) {
+export function ProjectSection({userType}:{userType: string}) {
     const [projects, setProjects] = useState<ProjectType[]>([])
     const [project, setProject] = useState<ProjectType>()
     const [typeSubscribe, setTypeSubscribe] = useState("medio");
@@ -29,8 +29,8 @@ export function ProjectSection({userType, setCategory}:{userType: string, setCat
          ) : null }
          {
            userType == "mentor" ?
-            projects !== null ? projects.map((project) => { return <ProjectCard  id={project.id} owner_name={project.owner_name} userType={userType} description={project.description} project_url={project.project_url} title={project.title} video_url={project.video_url} key={project.id} /> } ): null
-          : !!project ? <ProjectCard setCategorie={setCategory} id={project?.id!} owner_name={project?.owner_name!} description={project?.description!} project_url={project?.project_url!} title={project?.title!} userType={userType} video_url={project?.video_url!} key={project?.id}/> : <WriteProjectSection  /> 
+            projects !== null ? projects.map((project) => { return <ProjectEvaluableCard  id={project.id} owner_name={project.owner_name} userType={userType} description={project.description} project_url={project.project_url} title={project.title} video_url={project.video_url} key={project.id} /> } ): null
+          : !!project ? <ProjectEvaluableCard id={project?.id!} owner_name={project?.owner_name!} description={project?.description!} project_url={project?.project_url!} title={project?.title!} userType={userType} video_url={project?.video_url!} key={project?.id}/> : <WriteProjectSection  /> 
           } 
         </>
     )
