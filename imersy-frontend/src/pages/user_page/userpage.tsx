@@ -9,14 +9,15 @@ import { WriteSection } from "./categories/write_material";
 
 export function UserPage() {
   const [userType, setUserType] = useState("") 
-  const [categorie, setCategorie] = useState("material");
+  const [categorie, setCategorie] = useState(localStorage.getItem("categorie"));
   
   useEffect(() => {
     var token = getToken()
     setUserType(decodeToken(token!).user_type)    
   },[] )
-  function detectButtonClick(button: string) {
-    setCategorie(button);
+  function detectCategorieClick(button: string) {
+    setCategorie(button)
+    localStorage.setItem("categorie",button)
   };
 
   return (
@@ -26,19 +27,19 @@ export function UserPage() {
       <div className="">
         <button 
           className={`w-auto h-12 px-3 py-1 rounded-full text-2xl text-center font-semibold ${categorie === 'material' ? 'bg-white text-blue-2 border-white border-4' : 'bg-blue-2 text-white border-white border-4'}`}
-          onClick={() => detectButtonClick("material")}
+          onClick={() => detectCategorieClick("material")}
         >
           material de aula
         </button>
         <button 
           className={`w-auto h-12 mx-7 px-3 py-1 rounded-full text-2xl text-center font-semibold ${categorie === 'project' ? 'bg-white text-blue-2 border-white border-4' : 'bg-blue-2 text-white border-white border-4'}`}
-          onClick={() => detectButtonClick("project")}  
+          onClick={() => detectCategorieClick("project")}  
         >
           {userType == "mentor" ? "projetos enviados" : "projeto" }
         </button>
         <button 
           className={`w-auto h-12 px-3 py-1 rounded-full text-2xl text-center font-semibold ${categorie === 'rank' ? 'bg-white text-blue-2 border-white border-4' : 'bg-blue-2 text-white border-white border-4'}`}
-          onClick={() => detectButtonClick("rank")}
+          onClick={() => detectCategorieClick("rank")}
         >
           Rank
         </button>
