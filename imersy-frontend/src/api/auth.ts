@@ -14,11 +14,12 @@ interface RegisterProps{
     userScholl: string;
     phoneNumber: string;
     navigate: NavigateFunction;
-    setUserPassword: React.Dispatch<React.SetStateAction<string>>
+    setUserPassword: (password:string) => void 
+    setShowError: (show:boolean) => void
     event: FormEvent<HTMLFormElement>
 }
 
-export async function RegisterEvent({event, id, highScholl, phoneNumber, selectedSubscribeType, userCPF,userEmail, userName,userPassword,userScholl,navigate, setUserPassword}:RegisterProps) {
+export async function RegisterEvent({event, id, highScholl, phoneNumber, selectedSubscribeType, userCPF,userEmail, userName,userPassword,userScholl,navigate, setUserPassword, setShowError}:RegisterProps) {
     event.preventDefault();
 
     try {
@@ -38,8 +39,10 @@ export async function RegisterEvent({event, id, highScholl, phoneNumber, selecte
       setTimeout(() => {
         navigate("/user-page");
       }, 3000);
+      setShowError(false)
+
     } catch (error) {
-      console.error(error);
+      setShowError(true)
     }
   }
 
@@ -49,8 +52,9 @@ interface LoginProps{
   email: string
   password: string
   navigate: NavigateFunction
+  setShowError: (show:boolean) => void
 }
-export async function Login({event, email, password, navigate}:LoginProps) {
+export async function Login({event, email, password, navigate, setShowError}:LoginProps) {
   event.preventDefault();
   try {
     const response = await api.post("/login", {
@@ -58,9 +62,10 @@ export async function Login({event, email, password, navigate}:LoginProps) {
       password: password
     })
     setToken(response.data.token)
+    setShowError(false)
     navigate("/user-page")
   } catch (error) {
-    console.log(error);
+    setShowError(true)
   }
 }
 
