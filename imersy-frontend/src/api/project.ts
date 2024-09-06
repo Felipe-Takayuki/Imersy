@@ -40,6 +40,15 @@ export async function SendProject(event:FormEvent<HTMLFormElement>, title:string
     }
 }
 
+export async function GetTopRankersProject(setRankersProject:React.Dispatch<React.SetStateAction<ProjectType[]>>, typeSubscribe: string)
+  {
+  try {
+    const response = await api.get(`/rank/${typeSubscribe}`)
+    setRankersProject(response.data)
+  } catch (error) {
+    console.log(error)
+  }
+}
 export async function SendGrades(event:FormEvent<HTMLFormElement>,id:number, qualityGrade:string, creativityGrade:string ) {
     event.preventDefault()
     const token = await getToken()
