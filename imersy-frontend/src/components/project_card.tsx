@@ -16,7 +16,7 @@ export function ProjectEvaluableCard({id, title, owner_name, userType, descripti
     const [showModal, setShowModal] = useState(false)
     return (
         <>
-            <div className="p-5 bg-blue-3 w-1/2 rounded-2xl mt-12 ">
+            <div className="p-5 bg-blue-3 w-1/2 rounded-2xl mt-12 max-lg:w-full ">
                 <p className="font-medium text-4xl text-white">{title}</p>
                 <p className="text-gray text-xl mb-4">{owner_name}</p>
                 <p className="text-white text-xl mb-8">{description}</p>
