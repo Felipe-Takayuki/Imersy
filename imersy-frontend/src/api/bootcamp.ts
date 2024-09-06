@@ -1,9 +1,10 @@
+import { BootCamp } from "../pages/register/register_page";
 import api from "./api";
 
-export async function GetBootcamp() {
+export async function GetBootcamp(setBootcamp: React.Dispatch<React.SetStateAction<BootCamp | undefined>>) {
     try {
         const response = await api.get("/bootcamp");
-        return JSON.stringify(response.data);
+        setBootcamp(response.data)
     } catch (error) {
         console.error(error);
     }
