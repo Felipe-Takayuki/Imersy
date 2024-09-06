@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { useNavigate} from "react-router-dom";
 import { RegisterEvent } from "../../api/auth";
 import { GetBootcamp } from "../../api/bootcamp";
+import { NavBar } from "../home/navbar";
 
 export interface BootCamp {
   id: number;
@@ -23,6 +24,8 @@ export function RegisterPage() {
   const [userEmail, setUserEmail] = useState("");
   const [userPhone, setUserPhone] = useState("");
   const [userScholl, setUserScholl] = useState("");
+  const [showError, SetShowError] = useState(false)
+
 
 
   function handleSubscribeType(event: React.ChangeEvent<HTMLInputElement>) {
@@ -47,20 +50,21 @@ export function RegisterPage() {
 
   return (
     <>
-      <div className="w-vh h-vh flex justify-center  ">
-        <div className=" h-vh w-1/2 bg-blue-2 mt-9 p-9 rounded-t-xl">
+      <div className="w-vh h-vh flex justify-center">
+        <div className=" h-vh w-1/2 bg-blue-2 mt-9 p-9 rounded-t-xl max-lg:w-full max-lg:my-0 max-lg:rounded-none ">
           <p className="font-medium text-white text-4xl">{bootCamp?.title}</p>
           <p className="font-medium text-gray text-xl">{date}</p>
           <p className="font-medium text-gray text-xl mb-12">
             {bootCamp?.address}
           </p>
 
-          <form  className="flex flex-col items-center" onSubmit={(e) => RegisterEvent({event: e, id: 1, highScholl: selectedHighScholl, navigate: navigate, phoneNumber: userPhone, selectedSubscribeType: selectedSubscribeType, setUserPassword: setUserPassword, userCPF: userCPF, userEmail: userEmail, userName: userName, userPassword: userPassword, userScholl: userScholl })}>
+          <form  className="flex flex-col items-center" onSubmit={(e) => RegisterEvent({event: e, id: 1, highScholl: selectedHighScholl, navigate: navigate, phoneNumber: userPhone, selectedSubscribeType: selectedSubscribeType, setUserPassword: setUserPassword, userCPF: userCPF, userEmail: userEmail, userName: userName, userPassword: userPassword, userScholl: userScholl, setShowError: SetShowError })}>
             <fieldset className="w-full  ">
               <legend className="text-3xl font-medium text-white">
                 Tipo de inscrição
               </legend>
-              <div>
+              <div className=" flex max-sm:flex-col max-sm:p-2">
+                <div className="max-sm:mt-3 ">
                 <input
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   type="radio"
@@ -71,7 +75,8 @@ export function RegisterPage() {
                   value="medio"
                 />
                 <label className="text-2xl font-normal text-white mr-16"> Ensino médio</label>
-
+                </div>
+                <div>
                 <input
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   type="radio"
@@ -82,56 +87,64 @@ export function RegisterPage() {
                   onChange={handleSubscribeType}
                 />
                 <label className="text-2xl font-normal text-white"> Ensino técnico</label>
+                </div>
+
+
               </div>
             </fieldset>
             <fieldset className="mt-14 w-full ">
               <legend className="text-3xl font-medium text-white">
                 Ano do ensino médio
               </legend>
-              <div>
-                <input
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  type="radio"
-                  id="highScholl1"
-                  name="highScholl"
-                  value="1"
-                  checked={selectedHighScholl === "1"}
-                  onChange={handleHighScholl}
-                />
-                <label className="text-2xl font-normal text-white mr-16"> 1º </label>
-                <input
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  type="radio"
-                  id="highScholl2"
-                  name="highScholl"
-                  value="2"
-                  checked={selectedHighScholl === "2"}
-                  
-                  onChange={handleHighScholl}
-                />
-                <label className="text-2xl font-normal text-white mr-16"> 2º</label>
-
-                <input
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  type="radio"
-                  id="highScholl3"
-                  name="highScholl"
-                  value="3"
-                  checked={selectedHighScholl === "3"}
-                  onChange={handleHighScholl}
-                />
-                <label className="text-2xl font-normal text-white mr-16"> 3º</label>
-
-                <input
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  type="radio"
-                  id="highScholl4"
-                  name="highScholl"
-                  value="4"
-                  checked={selectedHighScholl === "4"}
-                  onChange={handleHighScholl}
-                />
-                <label className="text-2xl font-normal text-white"> Completo </label>
+              <div className="grid grid-cols-4 max-xl:grid-cols-2 max-sm:p-1 gap-x-1">
+                <div>
+                  <input
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    type="radio"
+                    id="highScholl1"
+                    name="highScholl"
+                    value="1"
+                    checked={selectedHighScholl === "1"}
+                    onChange={handleHighScholl}
+                  />
+                  <label className="text-2xl font-normal text-white "> 1º </label>
+                </div>
+                <div>
+                  <input
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    type="radio"
+                    id="highScholl2"
+                    name="highScholl"
+                    value="2"
+                    checked={selectedHighScholl === "2"}
+                    onChange={handleHighScholl}
+                  />
+                  <label className="text-2xl font-normal text-white"> 2º</label>
+                </div>
+                <div>
+                  <input
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    type="radio"
+                    id="highScholl3"
+                    name="highScholl"
+                    value="3"
+                    checked={selectedHighScholl === "3"}
+                    onChange={handleHighScholl}
+                  />
+                  <label className="text-2xl font-normal text-white"> 3º</label>
+                </div>
+                <div>
+                  <input
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    type="radio"
+                    id="highScholl4"
+                    name="highScholl"
+                    value="4"
+                    checked={selectedHighScholl === "4"}
+                    onChange={handleHighScholl}
+                  />
+                  <label className="text-2xl font-normal text-white"> Completo </label>
+                </div>
               </div>
             </fieldset>
             <div className="mt-10 w-full">
@@ -145,8 +158,8 @@ export function RegisterPage() {
                 required
                 className=" rounded-2xl w-full h-14 border-4 border-white bg-blue-2 placeholder-gray text-2xl p-2 text-white focus:border-white focus:outline-none"
               />
-              <div className="flex w-full mt-4">
-                <div className="w-3/5 ">
+              <div className="flex w-full mt-4 max-sm:flex-col">
+                <div className="w-3/5  max-sm:w-full">
                   <p className="text-2xl font-medium text-white ml-2">E-mail</p>
                   <input
                     type="email"
@@ -158,7 +171,7 @@ export function RegisterPage() {
                     className="w-full rounded-2xl  h-14 border-4 border-white bg-blue-2 placeholder-gray text-2xl p-2 text-white focus:border-white focus:outline-none"
                   />
                 </div>
-                <div className="w-2/5">
+                <div className="w-2/5 max-sm:w-full max-sm:mt-4">
                   <p className="text-2xl font-medium text-white ml-2">Senha</p>
                   <input
                     type="password"
@@ -167,7 +180,7 @@ export function RegisterPage() {
                     onChange={event => setUserPassword(event.target.value)}
                     maxLength={8}
                     required
-                    className="w-full ml-1  rounded-2xl h-14 border-4 border-white bg-blue-2 placeholder-white text-2xl p-2 text-white focus:border-white focus:outline-none"
+                    className="w-full ml-1   rounded-2xl h-14 border-4 border-white bg-blue-2 placeholder-white text-2xl p-2 text-white focus:border-white focus:outline-none"
                   />
                 </div>
               </div>
@@ -209,13 +222,16 @@ export function RegisterPage() {
                 className="rounded-2xl w-full h-14 border-4 border-white bg-blue-2 placeholder-gray text-2xl p-2 text-white focus:border-white focus:outline-none"
               />
             </div>
+            {showError ? (<><p className="mt-3 text-error text-2xl font-medium ">o usuário já existe!</p></>): null}
 
             <input
               type="submit"
 
               value="Confirmar Inscrição"
-              className="w-80 h-16 text-2xl text-center text-blue-2 font-semibold rounded-2xl bg-white mt-10 mb-40 "
+              className="w-80 h-16 text-2xl text-center text-blue-2 font-semibold rounded-2xl bg-white mt-10  "
             />
+            <button className="underline text-center text-white text-xl mt-5 mb-40" onClick={() => navigate("/login")}>Já possui uma conta?<br />Entre</button>
+
           </form>
         </div>
       </div>

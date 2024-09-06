@@ -15,7 +15,7 @@ export function RankSection() {
             <button className={`underline text-white text-xl ${typeSubscribe == "medio" ? 'bg-blue-3':null} p-1 mr-3`}  onClick={() => setTypeSubscribe("medio")}>ensino médio</button>
             <button className={`underline text-white text-xl ${typeSubscribe == "tecnico" ? 'bg-blue-3':null} p-1`} onClick={() => setTypeSubscribe("tecnico")}>ensino técnico</button>
           </div>
-         {rankerProjects !== null ? rankerProjects.map((rankerProject) => { return < RankerProjectCard key={rankerProject.id} description={rankerProject.description} owner_name={rankerProject.owner_name} project_url={rankerProject.project_url} title={rankerProject.title} video_url={rankerProject.video_url} />}): null}
+         {rankerProjects !== null ? rankerProjects.map((rankerProject) => { return < RankerProjectCard key={rankerProject.id} description={rankerProject.description} owner_name={rankerProject.owner_name} project_url={rankerProject.project_url} title={rankerProject.title} video_url={rankerProject.video_url} avarage={rankerProject.avarage} />}): null}
         </>
     )
 }

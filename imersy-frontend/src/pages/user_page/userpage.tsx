@@ -23,10 +23,10 @@ export function UserPage() {
   return (
     <>
       <NavBarUser />
-      <main className="flex w-auto px-20 py-10 flex-col">
-        <div className="">
+      <main className="flex w-auto px-20 max-sm:px-10 py-10 flex-col">
+        <div className="flex max-md:flex-col h-full max-md:justify-evenly">
           <button
-            className={`w-auto h-12 px-3 py-1 rounded-full text-2xl text-center font-semibold ${
+            className={`w-auto max-md:w-full  h-12 px-3 py-1 rounded-full text-2xl text-center font-semibold ${
               categorie === "material"
                 ? "bg-white text-blue-2 border-white border-4"
                 : "bg-blue-2 text-white border-white border-4"
@@ -36,7 +36,7 @@ export function UserPage() {
             material de aula
           </button>
           <button
-            className={`w-auto h-12 mx-7 px-3 py-1 rounded-full text-2xl text-center font-semibold ${
+            className={`w-auto max-md:my-2 max-md:mx-0 h-12 mx-7 px-3 py-1 rounded-full text-2xl text-center font-semibold ${
               categorie === "project"
                 ? "bg-white text-blue-2 border-white border-4"
                 : "bg-blue-2 text-white border-white border-4"

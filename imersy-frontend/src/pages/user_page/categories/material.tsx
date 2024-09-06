@@ -23,7 +23,7 @@ export function MaterialSection({userType, setCategory}:{userType:string, setCat
          <div>
             {
             userType == "mentor" ? <>
-             <button className="mt-12 px-20 py-7 text-3xl rounded-2xl text-white bg-blue-2" onClick={() => setCategory("write-material") }>Escrever aula</button>
+             <button className="mt-12 px-20 py-7 text-3xl rounded-2xl max-sm:text-2xl max-sm:w-full text-white bg-blue-2" onClick={() => setCategory("write-material") }>Escrever aula</button>
             </>: 
             null}
 

@@ -14,7 +14,7 @@ export function MaterialClassCard({id, title, owner_name, subject}:MaterialClass
     }
     return (
         <>
-         <div className="p-5 bg-blue-3 w-1/2 rounded-2xl mt-12">
+         <div className="p-5 bg-blue-3 w-1/2 rounded-2xl mt-12 max-lg:w-full ">
             <div>
                 <h2 className="font-medium text-4xl text-white">{title}</h2>
                 <p className="text-gray text-xl mb-10">{owner_name}</p>

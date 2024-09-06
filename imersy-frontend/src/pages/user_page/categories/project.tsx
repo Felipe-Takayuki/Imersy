@@ -10,11 +10,17 @@ export interface ProjectType{
     description: string,
     video_url: string
     project_url: string
+    avarage?:number
 }
 export function ProjectSection({userType}:{userType: string}) {
     const [projects, setProjects] = useState<ProjectType[]>([])
     const [project, setProject] = useState<ProjectType>()
-    const [typeSubscribe, setTypeSubscribe] = useState("medio");
+    const [typeSubscribe, setTypeSubscribe] = useState(localStorage.getItem("subscribeType")!);
+
+    function detectTypeSubscribe(type: string) {
+      setTypeSubscribe(type)
+      localStorage.setItem("subscribeType", type)
+    }
 
     useEffect(() => { 
         userType == "mentor" ? GetProjectsCategorie(setProjects, typeSubscribe) : GetProjectUser(setProject)
@@ -23,8 +29,8 @@ export function ProjectSection({userType}:{userType: string}) {
         <>
          {userType == "mentor" ? (
           <div className="flex mt-14">
-            <button className={`underline text-white text-xl ${typeSubscribe == "medio" ? 'bg-blue-3':null} p-1 mr-3`}  onClick={() => setTypeSubscribe("medio")}>ensino médio</button>
-            <button className={`underline text-white text-xl ${typeSubscribe == "tecnico" ? 'bg-blue-3':null} p-1`} onClick={() => setTypeSubscribe("tecnico")}>ensino técnico</button>
+            <button className={`underline text-white text-xl ${typeSubscribe == "medio" ? 'bg-blue-3':null} p-1 mr-3`}  onClick={() => detectTypeSubscribe("medio")}>ensino médio</button>
+            <button className={`underline text-white text-xl ${typeSubscribe == "tecnico" ? 'bg-blue-3':null} p-1`} onClick={() => detectTypeSubscribe("tecnico")}>ensino técnico</button>
           </div>
          ) : null }
          {
