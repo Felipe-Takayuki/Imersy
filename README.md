@@ -4,9 +4,9 @@
 
 ### Desenvolvido por [Felipe Takayuki](https://github.com/Felipe-Takayuki) durante o evento *Bootcamp Jovem Programador 2024* da [UNIMAR](https://unimar.br/)
 
-E-mail: [ftnaka91@gmail.com](mailto:ftnaka91@gmail.com) 
+**E-mail:** [ftnaka91@gmail.com](mailto:ftnaka91@gmail.com) 
 
-Linkedin: https://www.linkedin.com/in/felipe-takahashi-8b26b0281/
+**Linkedin:** https://www.linkedin.com/in/felipe-takahashi-8b26b0281/
 
 ---
 
@@ -62,7 +62,12 @@ npm run dev
 
 1 - Iniciar o DockerHub
 
-2 - Instale e inicie a api
+2 - entre no diretório 
+```bash
+cd /api
+```
+
+3 - Instale e inicie a api
 
 ```bash
 docker compose up
@@ -111,4 +116,61 @@ go run .
 
 ### Tecnologias utilizadas
 
-Fiz essa aplicação utilizando **React, Vite e TailwindCSS** no front e na minha API usei **golang e mariaDB**
+Fiz essa aplicação utilizando **React, Typescript, Vite e TailwindCSS** no front e na minha API usei **golang e mariaDB**
+
+## 💻 Como usar o site? 
+### login para os mentores
+**E-mails:**
+- joze@email.com
+- isaac@email.com
+- marco@email.com
+
+**Senha para todos:**
+admin123
+
+<div align="center">
+<h3 align="start">Está é a pagina inicial </h3>
+<img src="docs/homepage.png"  />
+<img src="docs/homepage2.png"  />
+
+<h3 align="start">Faça login se possuir uma uma conta</h3>
+<img src="docs/login.png" />
+
+<h3 align="start">Caso não tenha conta clique em inscreva-se  </h3>
+<img src="docs/cadastro1.png" />
+<img src="docs/cadastro2.png" />
+
+<h3 align="start">Realize o cadastro e você será redicionado a userpage</h3>
+<img src="docs/userpage.png" />
+
+
+<h3 align="start">Aqui você poderá ver o material de aula </h3>
+<img src="docs/userpage.png" />
+
+<h3 align="start">Envie e veja o seu projeto</h3>
+<img src="docs/write-project.png" />
+<img src="docs/project-user.png" />
+
+<h3 align="start">Veja o rank</h3>
+<img src="docs/ranktouser.png" />
+
+<h2 align="start">Para os mentores:</h2>
+<h3 align="start">Escreva o material das aulas e poste para os participantes</h3>
+<img src="docs/mentor_writeaula.png" />
+<h3 align="start">Veja os materiais que você ou os seus colegas postaram</h3>
+<img src="docs/mentor-show-aula.png" />
+<h3 align="start">Avalie os projetos</h3>
+<img src="docs/mentor-evaluable.png" />
+<img src="docs/mentor_evaluable1.png" />
+<h3 align="start">Veja no rank a média da avaliação de um projeto da sua nota com a dos outros mentores</h3>
+<img src="docs/rank-project.png" />
+
+<h3 align="start">Quando cansar saia um pouco</h3>
+<img src="docs/backbutton.png" />
+
+
+</div>
+
+---
+
+### Por fim gostaria de agradecer a [UNIMAR](https://unimar.br/) e aos envolvidos pela oportunidade de participar desse evento 🙏
