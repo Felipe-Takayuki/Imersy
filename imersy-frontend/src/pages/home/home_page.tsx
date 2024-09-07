@@ -1,4 +1,3 @@
-import "../../../public/icons/stars.svg"
 import { NavBar } from "./navbar"
 import { useNavigate } from "react-router-dom"
 
@@ -24,12 +23,12 @@ export function HomePage() {
                     dos<b> Bootcamps?</b></p>
                        
                     <div className="flex items-center">
-                        <img src="../../../public/icons/stars.svg" alt="estrelas" className="w-20 max-sm:hidden max-lg:w-16 max-lg:mr-2" />
+                        <img src="public/icons/stars.svg" alt="estrelas" className="w-20 max-sm:hidden max-lg:w-16 max-lg:mr-2" />
                         <span className="text-4xl text-blue-1 max-lg:ml-0 ml-10">Desenvolva soluções incríveis,<br /> concorrendo a <b>bolsas de estudo.</b></span>
                     </div>
                     
                     <div className="flex items-center mt-16  ">
-                        <img src="../../../public/icons/gears.svg" alt="engrenagens" className="max-sm:hidden w-28 max-lg:w-20 " />
+                        <img src="public/icons/gears.svg" alt="engrenagens" className="max-sm:hidden w-28 max-lg:w-20 " />
                         <span className="text-4xl  text-blue-1 max-lg:mb-10 max-lg:ml-0 m-3">Ganhe experiência e <br />amplie o seu <br /><b>conhecimento</b></span>
                     </div>
                    
