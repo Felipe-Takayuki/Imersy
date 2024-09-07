@@ -23,8 +23,12 @@ export function ProjectSection({userType}:{userType: string}) {
     }
 
     useEffect(() => { 
-        userType == "mentor" ? GetProjectsCategorie(setProjects, typeSubscribe) : GetProjectUser(setProject)
-    }, [typeSubscribe])
+      if (userType == "mentor") {
+        GetProjectsCategorie(setProjects, typeSubscribe)
+      } else {
+        GetProjectUser(setProject)
+      }
+    }, [typeSubscribe, projects, userType])
     return (
         <>
          {userType == "mentor" ? (
