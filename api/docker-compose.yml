@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: host.docker.internal  
+    volumes:
+      - .:/go/src/app
+    depends_on:
+      - db
+    deploy:
+      resources: 
+        limits:
+          cpus: '0.50'
+          memory: 512M  
+  db:
+    image: mariadb:10.9
+    container_name: imersy-db
+    restart: always
+    environment: 
+      MYSQL_USER: "root"
+      MYSQL_DATABASE: imersy
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql   
+    deploy:
+      resources: 
+        limits:
+          cpus: '0.30'
+          memory: 512M  
