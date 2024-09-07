@@ -5,6 +5,7 @@ import (
 
 	"github.com/Felipe-Takayuki/Imersy/api/internal/model"
 	"github.com/Felipe-Takayuki/Imersy/api/internal/utils"
+	"github.com/Felipe-Takayuki/Imersy/api/internal/utils/queries"
 )
 
 type UserDB struct {
@@ -184,11 +185,7 @@ func isEvaluated(db *sql.DB, projectID int64) error {
 // }
 func (udb *UserDB) GetProjectByUserID(id int64) (*model.Project, error) {
 	project := model.Project{}
-	query := `
-	SELECT p.id, p.name, u.name, p.description, p.video_url, p.github_url FROM PROJECT p 
-	JOIN PROJECT_OWNER po ON po.project_id = p.id 
-	JOIN USER u on u.id = po.user_id WHERE u.id= ?`
-	err := udb.db.QueryRow(query, id).Scan(&project.ID, &project.Name, &project.OwnerName, &project.Description, &project.VideoUrl, &project.ProjectUrl)
+	err := udb.db.QueryRow(queries.GET_USER_PROJECT, id).Scan(&project.ID, &project.Name, &project.OwnerName, &project.Description, &project.VideoUrl, &project.ProjectUrl)
 	if err != nil {
 		return nil, err
 	}
@@ -196,18 +193,18 @@ func (udb *UserDB) GetProjectByUserID(id int64) (*model.Project, error) {
 }
 
 func (udb *UserDB) GetTopRankProjectsByCategorie(categorie string) ([]*model.Project, error) {
-	query := `
-	SELECT p.id, p.name, u.name, p.description, p.video_url, p.github_url, AVG((ep.quality_grade + ep.creativity_grade) / 2.0) AS average_grade
-	FROM PROJECT p
-	JOIN EVALUATED_PROJECT ep ON p.id = ep.project_id
-	JOIN PROJECT_OWNER po ON p.id = po.project_id
-	JOIN USER u ON u.id = po.user_id
-	WHERE u.teach_type = ?
-	GROUP BY p.id, p.name, u.name, p.description, p.video_url, p.github_url
-	ORDER BY average_grade DESC
-	LIMIT 3
-`
-	rows, err := udb.db.Query(query, categorie)
+// 	query := `
+	// SELECT p.id, p.name, u.name, p.description, p.video_url, p.github_url, AVG((ep.quality_grade + ep.creativity_grade) / 2.0) AS average_grade
+	// FROM PROJECT p
+	// JOIN EVALUATED_PROJECT ep ON p.id = ep.project_id
+	// JOIN PROJECT_OWNER po ON p.id = po.project_id
+	// JOIN USER u ON u.id = po.user_id
+	// WHERE u.teach_type = ?
+	// GROUP BY p.id, p.name, u.name, p.description, p.video_url, p.github_url
+	// ORDER BY average_grade DESC
+	// LIMIT 3
+// `
+	rows, err := udb.db.Query(queries.GET_TOP_RANKERS, categorie)
 	if err != nil {
 		return nil, err
 	}
@@ -241,12 +238,8 @@ func (udb *UserDB) SendMaterialClass(title, subject, content string, userID int6
 }
 
 func (udb *UserDB) GetMaterialsClass() ([]*model.MaterialClass, error) {
-	query := `
-	SELECT m.id, m.title, u.name, m.subject FROM CLASS_MATERIAL m 
-	JOIN OWNER_MATERIAL om ON om.material_id = m.id
-	JOIN USER u ON u.id = om.user_id
-	`
-	rows, err := udb.db.Query(query)
+
+	rows, err := udb.db.Query(queries.GET_MATERIAL_CLASS)
 	if err != nil {
 		return nil, err
 	}
@@ -264,13 +257,8 @@ func (udb *UserDB) GetMaterialsClass() ([]*model.MaterialClass, error) {
 
 func (udb *UserDB) GetMaterialClassByID(materialID int64) (*model.MaterialClass, error) {
 	material := model.MaterialClass{}
-	query := `
-	SELECT m.id, m.title, u.name, m.subject, m.content FROM CLASS_MATERIAL m 
-	JOIN OWNER_MATERIAL om ON om.material_id = m.id
-	JOIN USER u ON u.id = om.user_id
-	WHERE m.id = ?
-	`
-	err := udb.db.QueryRow(query, materialID).Scan(&material.ID, &material.Title, &material.OwnerName, &material.Subject, &material.Content)
+
+	err := udb.db.QueryRow(queries.GET_MATERIAL_CLASS, materialID).Scan(&material.ID, &material.Title, &material.OwnerName, &material.Subject, &material.Content)
 	if err != nil {
 		return nil, err
 	}
