@@ -28,7 +28,7 @@ export function ProjectSection({userType}:{userType: string}) {
       } else {
         GetProjectUser(setProject)
       }
-    }, [typeSubscribe, projects, userType])
+    }, [typeSubscribe , userType])
     return (
         <>
          {userType == "mentor" ? (
