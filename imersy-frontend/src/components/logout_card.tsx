@@ -12,11 +12,11 @@ export function LogOutModal({setShowUserCard}:{setShowUserCard:(show:boolean) =>
   }, [])
   return (
     <div className="fixed bg-blue-2/40 inset-0 w-full flex justify-end ">
-      <div className="relative w-1/4 p-2 h-2/5 max-sm:m-2 m-4 max-lg:w-2/5 max-md:w-1/2 max-sm:w-full rounded-2xl bg-blue-2">
+      <div className="relative w-1/4 p-4 h-2/5 max-sm:m-2 m-4 max-lg:w-2/5 max-md:w-1/2 max-sm:w-full rounded-2xl bg-blue-2">
         <div className="flex items-center">
           <div className="flex items-center">
             <img
-            src="../../public/icons/user.svg"
+            src="public/icons/user.svg"
             alt="user icon"
             className="mr-2 w-12"
             />
