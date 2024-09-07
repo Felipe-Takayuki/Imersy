@@ -12,12 +12,11 @@ import (
 
 func main() {
 	dbHost := os.Getenv("DB_HOST")
-	password := "root"
+
 	if dbHost == "" {
 		dbHost = "127.0.0.1"
-		password = ""
 	}
-	db, err := sql.Open("mysql", "root:"+password+"@tcp("+dbHost+":3306)/imersy")
+	db, err := sql.Open("mysql", "root:@tcp("+dbHost+":3306)/imersy")
 	if err != nil {
 		panic(err.Error())
 	}
