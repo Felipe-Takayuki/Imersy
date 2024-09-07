@@ -22,7 +22,7 @@ func (bdb *BootcampDatabase) RegisterInBootcamp(bootcampID int, subscribeType st
 		return nil, err 
 	}
 	user.ID = userId.ID
-	_, err = bdb.db.Exec("INSERT INTO SUBSCRIBER_BOOTCAMP(bootcamp_id, user_id) VALUES (?, ?)", bootcampID, user.ID)
+	_, err = bdb.db.Exec("INSERT INTO subscriber_bootcamp(bootcamp_id, user_id) VALUES (?, ?)", bootcampID, user.ID)
 	if err != nil {
 		return nil, err 
 	}
@@ -31,7 +31,7 @@ func (bdb *BootcampDatabase) RegisterInBootcamp(bootcampID int, subscribeType st
 
 func (bdb *BootcampDatabase) GetBootcampActual() (*model.Bootcamp, error) {
 	var bootcamp model.Bootcamp
-	err := bdb.db.QueryRow("SELECT id, title, address, start_date, end_date FROM BOOTCAMP WHERE YEAR(start_date) = YEAR(CURRENT_DATE)").Scan(&bootcamp.ID, &bootcamp.Title, &bootcamp.Address, &bootcamp.StartDate, &bootcamp.EndDate)
+	err := bdb.db.QueryRow("SELECT id, title, address, start_date, end_date FROM bootcamp WHERE YEAR(start_date) = YEAR(CURRENT_DATE)").Scan(&bootcamp.ID, &bootcamp.Title, &bootcamp.Address, &bootcamp.StartDate, &bootcamp.EndDate)
 	if err != nil {
 		return nil, err 
 	}
