@@ -34,6 +34,8 @@ Requisitos obrigatórios: instalar o [node.js](https://nodejs.org/pt/download/pr
 
 - *Front-End:*
 
+É necessário instalar alguma extensão que libere os CORS do navegador estou usando esse [Cors Unblock](https://chromewebstore.google.com/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino)
+
 1 - Clone o projeto 
 
 ```bash
