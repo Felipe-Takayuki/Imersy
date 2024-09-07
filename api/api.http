@@ -17,12 +17,12 @@ POST http://localhost:3000/login
 
 {
     "email": "isaac@email.com",
-    "password": "arnaldo123"
+    "password": "admin123"
 }
 
 ### 
 POST http://localhost:3000/material-class
-Authorization: Bearer TOKEN
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImlzYWFjQGVtYWlsLmNvbSIsImV4cCI6MTcyNTY3ODYzMSwiaWQiOjIsIm5hbWUiOiJpc2FhYyIsInVzZXJfdHlwZSI6Im1lbnRvciJ9.GieyslJTBMj10dei8s24DFIT-IcadXx9BuOkBYefcV0
 
 {
     "title": "Aula 1",
