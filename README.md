@@ -125,7 +125,7 @@ Fiz essa aplicação utilizando **React, Typescript, Vite e TailwindCSS** no fro
 - isaac@email.com
 - marco@email.com
 
-**Senha para todos:**
+**Senha para todos mentores:**
 admin123
 
 <div align="center">
