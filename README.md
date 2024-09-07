@@ -43,7 +43,7 @@ git clone https://github.com/Felipe-Takayuki/Imersy.git
 2 - Entrar no diretório do front-end
 
 ```bash
-cd imersy/imersy-frontend
+cd Imersy/imersy-frontend
 ```
 
 3 - Instalar os pacotes necessários
@@ -64,7 +64,7 @@ npm run dev
 
 2 - entre no diretório 
 ```bash
-cd /api
+cd Imersy/api
 ```
 
 3 - Instale e inicie a api
@@ -75,7 +75,7 @@ docker compose up
 
 - *Back-End*
 
-1 - Abra o arquivo db.sql do diretório /api 
+1 - Abra o arquivo db.sql do diretório Imersy/api 
 
 2 - Copie o conteúdo desse arquivo  e crie o banco de dados manualmente com usuario root e sem senha
 
