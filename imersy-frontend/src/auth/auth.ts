@@ -14,5 +14,6 @@ export function setToken(token:string) {
 
 export function logOut() {
     localStorage.removeItem("token")
+    localStorage.removeItem("categorie")
     location.reload()
 }

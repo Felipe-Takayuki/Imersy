@@ -9,7 +9,7 @@ import { RankSection } from "./categories/rank";
 
 export function UserPage() {
   const [userType, setUserType] = useState("");
-  const [categorie, setCategorie] = useState(localStorage.getItem("categorie"));
+  const [categorie, setCategorie] = useState(!localStorage.getItem("categorie") ? "material":localStorage.getItem("categorie"));
 
   useEffect(() => {
     var token = getToken();
