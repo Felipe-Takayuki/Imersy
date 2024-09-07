@@ -162,21 +162,7 @@ func (uws *UserWebServer) GetTopRankProjectsByCategorie(w http.ResponseWriter, r
 		json.NewEncoder(w).Encode(projects)
 	
 }
-// func (uws *UserWebServer) GetProjectByID(w http.ResponseWriter, r *http.Request) {
-// 	w.Header().Set("Content-Type", "application/json")
-// 	projectID, err := strconv.Atoi(chi.URLParam(r, "project_id"))
-// 	if err != nil {
-// 		http.Error(w, "project_id is not int!", http.StatusInternalServerError)
-// 		return
-// 	}
-// 	project, err := uws.userService.GetProjectByID(int64(projectID))
-// 	if err != nil{
-// 		w.WriteHeader(http.StatusInternalServerError)
-// 		json.NewEncoder(w).Encode(err.Error())
-// 		return
-// 	}
-// 	json.NewEncoder(w).Encode(project)
-// }
+
 
 func (uws *UserWebServer) GetProjectByUserID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
